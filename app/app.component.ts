@@ -1,16 +1,14 @@
-import {Component} from 'angular2/core';
-import {RouteConfig} from 'angular2/router';
 import {bootstrap} from 'angular2/platform/browser'
+import {Component} from 'angular2/core';
+
 import {PostListComponent} from './posts/post-list.component';
 
 @Component({
     selector: 'postal-app',
+    directives: [],
     templateUrl: 'app/app.html'
 })
-@RouteConfig([
-  { path: '/posts', component: PostListComponent, as: 'PostList' }
-])
 
-export class AppComponent { }
+export class App { }
 
-bootstrap(AppComponent);
+bootstrap(App, []);
