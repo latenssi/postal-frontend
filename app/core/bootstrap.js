@@ -3,7 +3,7 @@
 require('./vendor')();
 
 // load the main app file
-var appModule = require('../index');
+var appModule = require('index');
 
 // replaces ng-app="appName"
 angular.element(document).ready(function () {

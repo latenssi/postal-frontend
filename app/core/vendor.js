@@ -2,8 +2,7 @@
 
 module.exports = function () {
   /* Styles */
-  require('angular-material/angular-material.css');
-  require('../styles/main.scss');
+  require('index.scss');
 
   /* JS */
   require('angular');

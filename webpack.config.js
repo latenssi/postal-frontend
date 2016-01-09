@@ -1,30 +1,34 @@
 'use strict';
 
-var APP_DIR = __dirname + '/app';
-var webpack = require('webpack');
+var SRC_DIR = __dirname + '/app';
+var DIST_DIR = __dirname + '/dist';
 var path = require('path');
-var pkg = require('./package.json');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  context: APP_DIR,
-  entry: {
-    app: ['webpack/hot/dev-server', './core/bootstrap.js']
-  },
+  context: SRC_DIR,
+  entry: './core/bootstrap.js',
   output: {
-    path: APP_DIR,
-    filename: 'bundle.js'
+    path: DIST_DIR,
+    filename: 'bundle-[hash:6].js'
+  },
+  resolve: {
+    root: SRC_DIR
   },
   module: {
    loaders: [
      {
-       test: /\.html$/,
-       loader: 'file?name=templates/[name]-[hash:6].html'
+       test: /\.html/,
+       loader: 'raw'
+     },
+     {
+       test: /\.json/,
+       loader: 'json'
      },
      {
        test: /\.css$/,
        loader: "style!css"
-      },
+     },
      {
        test: /\.scss$/,
        loader: 'style!css!sass'
@@ -33,16 +37,14 @@ module.exports = {
        test: /\.js$/,
        exclude: /(node_modules)/,
        loader: "ng-annotate"
-      },
+     }
    ]
- },
- plugins: [
-  new HtmlWebpackPlugin({
-    filename: 'index.html',
-    pkg: pkg,
-    template: path.join(APP_DIR, 'index.html')
-  }),
-  new webpack.optimize.OccurenceOrderPlugin(),
-  new webpack.optimize.DedupePlugin(),
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      hash: true,
+      template: path.join(SRC_DIR, 'index.html'),
+      inject: 'body'
+    })
   ]
 }
