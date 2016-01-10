@@ -7,15 +7,13 @@ module.exports = /*@ngInject*/ function (ENV, $http, $localStorage, jwtHelper, U
     return $http.post(ENV.backendUrl + '/api-token-auth/', credentials)
       .then(function (response) {
         $localStorage.token = response.data.token;
-        User.setUser(User.queryUser());
+        User.setUser(jwtHelper.decodeToken($localStorage.token));
       })
-      .then(null, function (err) {
-        $localStorage.token = '';
-      })
+      .then(null, _this.logout)
   }
 
   _this.logout = function () {
-    $localStorage.token = '';
+    delete $localStorage.token;
     User.clearUser();
   }
 

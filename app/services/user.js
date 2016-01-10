@@ -1,19 +1,13 @@
 'use strict';
 
-module.exports = /*@ngInject*/ function (ENV, $resource, $localStorage) {
+module.exports = /*@ngInject*/ function (ENV, $localStorage, jwtHelper) {
   var _this = {}
 
-  var resource = $resource('', {},
-     {
-       user: {method : 'GET', url: ENV.backendUrl + '/user/'}
-     }
-  );
-
-  var currentUser = {};
+  var currentUser = null;
 
   function init() {
-    if ($localStorage.token) {
-      currentUser = resource.user();
+    if ($localStorage.token && !jwtHelper.isTokenExpired($localStorage.token)) {
+      _this.setUser(jwtHelper.decodeToken($localStorage.token));
     }
   }
 
@@ -21,16 +15,12 @@ module.exports = /*@ngInject*/ function (ENV, $resource, $localStorage) {
     return currentUser;
   }
 
-  _this.queryUser = function () {
-    return resource.user();
-  }
-
   _this.setUser = function (newUser) {
-    currentUser = angular.extend(currentUser, newUser);
+    currentUser = newUser;
   }
 
   _this.clearUser = function () {
-    currentUser = {};
+    currentUser = null;
   }
 
   init();
