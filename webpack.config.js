@@ -30,6 +30,13 @@ module.exports = {
       {test: /\.js$/, exclude: /(node_modules)/, loader: 'ng-annotate'}
    ]
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      hash: true,
+      template: path.join(SRC_DIR, 'index.html'),
+      inject: 'body'
+    })
+  ],
   externals: {
     'angular': true,
     'angular-animate': '"ngAnimate"',
