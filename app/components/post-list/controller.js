@@ -1,9 +1,11 @@
-'use strict';
+(function () {
+  'use strict';
 
-module.exports = /*@ngInject*/ function (Post) {
-  var ctrl = this;
+  module.exports = /*@ngInject*/ function (Post) {
+    var ctrl = this;
 
-  Post.query(function (response) {
-    console.log(response);
-  });
-};
+    Post.query(function (response) {
+      console.log(response);
+    });
+  };
+}());

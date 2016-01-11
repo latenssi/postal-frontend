@@ -1,29 +1,31 @@
-'use strict';
+(function () {
+  'use strict';
 
-module.exports = /*@ngInject*/ function (ENV, $localStorage, jwtHelper) {
-  var _this = {}
+  module.exports = /*@ngInject*/ function (ENV, $localStorage, jwtHelper) {
+    var _this = {};
 
-  var currentUser = null;
+    var currentUser = null;
 
-  function init() {
-    if ($localStorage.token && !jwtHelper.isTokenExpired($localStorage.token)) {
-      _this.setUser(jwtHelper.decodeToken($localStorage.token));
+    function init() {
+      if ($localStorage.token && !jwtHelper.isTokenExpired($localStorage.token)) {
+        _this.setUser(jwtHelper.decodeToken($localStorage.token));
+      }
     }
-  }
 
-  _this.current = function () {
-    return currentUser;
-  }
+    _this.current = function () {
+      return currentUser;
+    };
 
-  _this.setUser = function (newUser) {
-    currentUser = newUser;
-  }
+    _this.setUser = function (newUser) {
+      currentUser = newUser;
+    };
 
-  _this.clearUser = function () {
-    currentUser = null;
-  }
+    _this.clearUser = function () {
+      currentUser = null;
+    };
 
-  init();
+    init();
 
-  return _this;
-};
+    return _this;
+  };
+}());

@@ -1,47 +1,58 @@
-'use strict';
+(function () {
+  'use strict';
 
-var app = angular.module('app', [
-  /* 3rd party */
-  'ngAnimate',
-  'ngCookies',
-  'ngMaterial',
-  'ngRoute',
-  'ngResource',
-  'ngStorage',
-  'angular-jwt',
+  require('index.scss');
 
-  /* modules */
-  require('components').name,
-  require('services').name,
-  require('filters').name
-]);
+  var angular = require('angular');
 
-app.constant('ENV', {
-  backendUrl: 'http://localhost:8000',
-  debugEnabled: true
-});
+  var app = angular.module('postal', [
+    /* 3rd party */
+    require('angular-animate'),
+    require('angular-aria'),
+    require('angular-cookies'),
+    require('angular-jwt'),
+    require('angular-messages'),
+    require('angular-material'),
+    require('angular-resource'),
+    require('angular-route'),
+    require('ngstorage').name,
 
-app.config(function ($logProvider, ENV){
-  $logProvider.debugEnabled(ENV.debugEnabled);
-});
+    /* modules */
+    require('components'),
+    require('services'),
+    require('filters')
+  ]);
 
-app.config(function ($locationProvider, $resourceProvider){
-  $locationProvider.html5Mode(true).hashPrefix('!');
+  app.constant('ENV', {
+    backendUrl: 'http://localhost:8000',
+    debugEnabled: true
+  });
 
-  // Don't strip trailing slashes from calculated URLs
-  $resourceProvider.defaults.stripTrailingSlashes = false;
-});
+  app.config(function ($logProvider, ENV){
+    $logProvider.debugEnabled(ENV.debugEnabled);
+  });
 
-app.config(function($httpProvider, jwtInterceptorProvider) {
-  jwtInterceptorProvider.tokenGetter = function ($localStorage) {
-    return $localStorage.token;
-  };
+  app.config(function ($locationProvider, $resourceProvider){
+    $locationProvider.html5Mode(true).hashPrefix('!');
 
-  jwtInterceptorProvider.authPrefix = 'JWT ';
+    // Don't strip trailing slashes from calculated URLs
+    $resourceProvider.defaults.stripTrailingSlashes = false;
+  });
 
-  $httpProvider.interceptors.push('jwtInterceptor');
-});
+  app.config(function($httpProvider, jwtInterceptorProvider) {
+    jwtInterceptorProvider.tokenGetter = /*@ngInject*/ function ($localStorage) {
+      return $localStorage.token;
+    };
 
-app.run(function (Authentication) {});
+    $httpProvider.interceptors.push('jwtInterceptor');
+  });
 
-module.exports = app;
+  app.run(function (Authentication) {});
+
+  angular.element(document).ready(function () {
+    angular.bootstrap(document, [app.name], {
+      strictDi: true
+    });
+  });
+
+}());

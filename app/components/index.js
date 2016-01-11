@@ -1,2 +1,8 @@
-module.exports = angular.module('app.components', [])
-  .directive('postList', require('./post-list'));
+(function () {
+   'use strict';
+
+   require('angular').module('postal.components', [])
+     .directive('postList', require('./post-list'));
+
+   module.exports = 'postal.components';
+}());

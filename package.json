@@ -7,24 +7,19 @@
     "url": "git+https://github.com/latenssi/postal-frontend.git"
   },
   "scripts": {
-    "start": "node node_modules/.bin/webpack-dev-server --content-base app --hot",
+    "start": "node node_modules/.bin/webpack-dev-server --content-base app --hot --inline --config webpack.config.js",
     "build": "node node_modules/.bin/webpack --bail -p"
   },
   "license": "ISC",
   "dependencies": {
-    "angular": "^1.4.8",
-    "angular-animate": "^1.4.8",
-    "angular-cookies": "^1.4.8",
     "angular-jwt": "0.0.9",
-    "angular-material": "^1.0.1",
-    "angular-resource": "^1.4.8",
-    "angular-route": "^1.4.8",
     "ngstorage": "^0.3.10"
   },
   "devDependencies": {
     "css-loader": "^0.23.1",
-    "fs": "0.0.2",
     "html-webpack-plugin": "^1.7.0",
+    "jshint": "^2.8.0",
+    "jshint-loader": "^0.8.3",
     "json-loader": "^0.5.4",
     "ng-annotate-loader": "0.0.10",
     "node-sass": "^3.4.2",
