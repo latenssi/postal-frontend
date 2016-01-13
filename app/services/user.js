@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  module.exports = /*@ngInject*/ function (ENV, $localStorage, jwtHelper) {
+  module.exports = /*@ngInject*/ function () {
     var _this = {};
 
     var currentUser = null;
