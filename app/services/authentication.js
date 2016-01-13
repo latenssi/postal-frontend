@@ -9,10 +9,12 @@
      var refreshTimeout;
 
      _this.login = function (credentials) {
+       var token;
        return $http.post(ENV.backendUrl + AUTH_URL, credentials)
          .then(function (response) {
-           setToken(response.data.token);
-           User.setUser(jwtHelper.decodeToken(getToken()));
+           token = response.data.token;
+           setToken(token);
+           User.set(jwtHelper.decodeToken(token));
            return User.current();
          })
          .then(null, function (err) {
@@ -24,7 +26,7 @@
      _this.logout = function () {
        if (refreshTimeout) $timeout.cancel(refreshTimeout);
        clearToken();
-       User.clearUser();
+       User.clear();
      };
 
      _this.isAuthenticated = function () {
@@ -32,14 +34,14 @@
      };
 
      function init() {
-       if (getToken()) {
-         if (jwtHelper.isTokenExpired(getToken())){
+       var token = getToken();
+       if (token) {
+         if (jwtHelper.isTokenExpired(token)){
            $log.debug("Auth token has expired.");
            _this.logout();
          } else {
-           var expiryDate = jwtHelper.getTokenExpirationDate(getToken());
-           $log.debug("Auth token will expire", expiryDate);
-           setExpiryTimeout(expiryDate);
+           setToken(token);
+           User.set(jwtHelper.decodeToken(token));
          }
        }
      }
@@ -49,19 +51,22 @@
      }
 
      function setToken(token) {
+       var expiryDate;
        $log.debug("New auth token received.");
        $localStorage.token = token;
-       var expiryDate = jwtHelper.getTokenExpirationDate(token);
+       expiryDate = jwtHelper.getTokenExpirationDate(token);
        setExpiryTimeout(expiryDate);
        $log.debug("Auth token will expire", expiryDate);
      }
 
      function refreshToken() {
+       var token;
        $log.debug("Refreshing auth token...");
        $http.post(ENV.backendUrl + REFRESH_URL, {token: getToken()})
         .then(function (response) {
-          setToken(response.data.token);
-          User.setUser(jwtHelper.decodeToken(getToken()));
+          token = response.data.token;
+          setToken(token);
+          User.set(jwtHelper.decodeToken(token));
         })
         .then(null, _this.logout);
      }

@@ -6,25 +6,17 @@
 
     var currentUser = null;
 
-    // function init() {
-    //   if ($localStorage.token) {
-    //     _this.setUser(jwtHelper.decodeToken($localStorage.token));
-    //   }
-    // }
-
     _this.current = function () {
       return currentUser;
     };
 
-    _this.setUser = function (newUser) {
+    _this.set = function (newUser) {
       currentUser = newUser;
     };
 
-    _this.clearUser = function () {
+    _this.clear = function () {
       currentUser = null;
     };
-
-    // init();
 
     return _this;
   };
