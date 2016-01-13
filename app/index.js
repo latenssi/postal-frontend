@@ -56,8 +56,6 @@
     $httpProvider.interceptors.push('jwtInterceptor');
   });
 
-  app.run(function (Authentication) {});
-
   angular.element(document).ready(function () {
     angular.bootstrap(document, [app.name], {
       strictDi: true
