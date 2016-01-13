@@ -6,11 +6,11 @@
 
     var currentUser = null;
 
-    function init() {
-      if ($localStorage.token && !jwtHelper.isTokenExpired($localStorage.token)) {
-        _this.setUser(jwtHelper.decodeToken($localStorage.token));
-      }
-    }
+    // function init() {
+    //   if ($localStorage.token) {
+    //     _this.setUser(jwtHelper.decodeToken($localStorage.token));
+    //   }
+    // }
 
     _this.current = function () {
       return currentUser;
@@ -24,7 +24,7 @@
       currentUser = null;
     };
 
-    init();
+    // init();
 
     return _this;
   };

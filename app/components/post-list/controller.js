@@ -1,11 +1,11 @@
 (function () {
   'use strict';
 
-  module.exports = /*@ngInject*/ function (Post) {
+  module.exports = /*@ngInject*/ function (Post, User) {
     var ctrl = this;
 
-    Post.query(function (response) {
-      console.log(response);
-    });
+    ctrl.user = User;
+
+    Post.query(function (response) {});
   };
 }());

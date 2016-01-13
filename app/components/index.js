@@ -3,7 +3,8 @@
 
    require('angular').module('postal.components', [])
      .directive('postList', require('./post-list'))
-     .directive('loginDialog', require('./login-dialog'));
+     .directive('logoutButton', require('./logout-button'))
+     .directive('loginForm', require('./login-form'));
 
    module.exports = 'postal.components';
 }());
