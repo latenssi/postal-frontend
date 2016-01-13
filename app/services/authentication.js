@@ -1,7 +1,7 @@
 (function () {
    'use strict';
 
-   module.exports = /*@ngInject*/ function ($log, ENV, $http, $localStorage, $timeout, jwtHelper, User) {
+   module.exports = /*@ngInject*/ function (ENV, AUTH_EVENTS, $rootScope, $log, $http, $localStorage, $timeout, jwtHelper, User) {
      var _this = {};
      var AUTH_URL = '/api-token-auth/';
      var REFRESH_URL = '/api-token-refresh/';
@@ -13,8 +13,7 @@
        return $http.post(ENV.backendUrl + AUTH_URL, credentials)
          .then(function (response) {
            token = response.data.token;
-           setToken(token);
-           User.set(jwtHelper.decodeToken(token));
+           authSuccess(token);
            return User.current();
          })
          .then(null, function (err) {
@@ -27,6 +26,7 @@
        if (refreshTimeout) $timeout.cancel(refreshTimeout);
        clearToken();
        User.clear();
+       $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
      };
 
      _this.isAuthenticated = function () {
@@ -40,8 +40,7 @@
            $log.debug("Auth token has expired.");
            _this.logout();
          } else {
-           setToken(token);
-           User.set(jwtHelper.decodeToken(token));
+           authSuccess(token);
          }
        }
      }
@@ -64,9 +63,7 @@
        $log.debug("Refreshing auth token...");
        $http.post(ENV.backendUrl + REFRESH_URL, {token: getToken()})
         .then(function (response) {
-          token = response.data.token;
-          setToken(token);
-          User.set(jwtHelper.decodeToken(token));
+          setToken(response.data.token);
         })
         .then(null, _this.logout);
      }
@@ -78,6 +75,12 @@
      function setExpiryTimeout(expiryDate) {
        if (refreshTimeout) $timeout.cancel(refreshTimeout);
        refreshTimeout = $timeout(refreshToken, expiryDate - new Date() - REFRESH_LEEWAY);
+     }
+
+     function authSuccess(token) {
+       setToken(token);
+       User.set(jwtHelper.decodeToken(token));
+       $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
      }
 
      init();

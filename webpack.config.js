@@ -46,6 +46,7 @@ module.exports = {
     'angular-resource': '"ngResource"',
     'angular-route': '"ngRoute"',
     'angular-sanitize': '"ngSanitize"',
-    'angular-material': '"ngMaterial"'
+    'angular-material': '"ngMaterial"',
+    'moment': true
   }
 }
