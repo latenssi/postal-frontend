@@ -5,6 +5,7 @@
      .directive('userAuth', require('./user-auth'))
      .directive('userMenu', require('./user-menu'))
      .directive('postCreate', require('./post-create'))
+     .directive('postDeleteButton', require('./post-delete-button'))
      .directive('postList', require('./post-list'))
      .directive('postListItem', require('./post-list-item'))
      .directive('logoutButton', require('./logout-button'))
