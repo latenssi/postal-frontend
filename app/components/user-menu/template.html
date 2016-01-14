@@ -1,0 +1,5 @@
+<login-form ng-if="!ctrl.auth.isAuthenticated()"></login-form>
+<div class="" ng-if="ctrl.auth.isAuthenticated()">
+  Logged in as {{ ctrl.user.current().username }}
+  <logout-button></logout-button>
+</div>

@@ -12,14 +12,9 @@
   </head>
 
   <body layout="column" user-auth>
-
-    <login-form ng-if="!userAuth.auth.isAuthenticated()"></login-form>
-    <div class="" ng-if="userAuth.auth.isAuthenticated()">
-      Logged in as {{ userAuth.user.current().username }}
-      <logout-button></logout-button>
-    </div>
-
-    <post-list></post-list>
+    <user-menu></user-menu>
+    <post-create ng-if="userAuth.auth.isAuthenticated()"></post-create>
+    <post-list ng-if="userAuth.auth.isAuthenticated()"></post-list>
 
     <script src="https://code.angularjs.org/1.4.8/angular.min.js"></script>
     <script src="https://code.angularjs.org/1.4.8/angular-animate.min.js"></script>
