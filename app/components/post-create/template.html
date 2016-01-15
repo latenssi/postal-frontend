@@ -1,22 +1,7 @@
-<form name="postCreateForm" ng-submit="ctrl.createPost(ctrl.newPost)" novalidate>
+<form name="ctrl.postCreateForm" ng-submit="ctrl.createPost(ctrl.post)" novalidate layout="row">
 
-  <md-input-container class="move-down">
-    <label>Title</label>
-    <input name="title" ng-model="ctrl.newPost.title">
+  <md-input-container md-no-float flex>
+    <input ngf-select ng-change="ctrl.createPost(ctrl.post)" name="file" type="file" ng-model="ctrl.post.file" aria-label="File" required>
   </md-input-container>
 
-  <md-input-container class="move-down">
-    <label>Tags</label>
-    <input name="tags" ng-model="ctrl.newPost.tags">
-  </md-input-container>
-
-  <md-input-container md-no-float>
-    File <input name="file" type="file" ng-model="ctrl.newPost.file" aria-label="File">
-  </md-input-container>
-
-  <md-input-container md-no-float>
-    Image <input name="image" type="file" ng-model="ctrl.newPost.image" aria-label="Image">
-  </md-input-container>
-
-  <md-button type="submit">Submit</md-button>
 </form>

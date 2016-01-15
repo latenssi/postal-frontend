@@ -1,0 +1,18 @@
+md-list-item .md-avatar, md-list-item .md-avatar-icon {
+  &.md-avatar-square {border-radius: 0;}
+  &.md-avatar-big {width: 64px; height: 64px;}
+}
+
+md-list-item .md-avatar-icon {
+  &.md-avatar-big {
+    width: 48px;
+    height: 48px;
+    font-size: 48px;
+  }
+}
+
+a.post-file {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

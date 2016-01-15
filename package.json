@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "angular-jwt": "0.0.9",
+    "ng-file-upload": "^11.1.1",
     "ngstorage": "^0.3.10"
   },
   "devDependencies": {

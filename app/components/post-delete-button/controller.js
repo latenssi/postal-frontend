@@ -1,19 +1,20 @@
 (function () {
   'use strict';
 
-  module.exports = /*@ngInject*/ function ($log, Post) {
+  module.exports = /*@ngInject*/ function ($log, FilePost) {
     var ctrl = this;
 
     function postDeleteSuccess(response) {
-      $log.debug(response);
+      ctrl.onDelete({post: ctrl.post});
     }
 
-    function postDeleteError(response) {
-      $log.debug(response);
+    function postDeleteError(err) {
+      console.error(err);
     }
 
-    ctrl.deletePost = function () {
-      Post.delete(ctrl.post).$promise
+    ctrl.deletePost = function (post) {
+
+      FilePost.delete({id: post.id}).$promise
         .then(
           postDeleteSuccess,
           postDeleteError

@@ -7,7 +7,6 @@
      .directive('postCreate', require('./post-create'))
      .directive('postDeleteButton', require('./post-delete-button'))
      .directive('postList', require('./post-list'))
-     .directive('postListItem', require('./post-list-item'))
      .directive('logoutButton', require('./logout-button'))
      .directive('loginForm', require('./login-form'));
 

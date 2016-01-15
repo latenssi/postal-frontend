@@ -4,7 +4,7 @@
   require('index.scss');
 
   var angular = require('angular');
-  
+
   var app = angular.module('postal', [
     /* 3rd party */
     require('angular-animate'),
@@ -15,7 +15,6 @@
     require('angular-material'),
     require('angular-resource'),
     require('angular-route'),
-    require('ngstorage').name,
 
     /* modules */
     require('components'),

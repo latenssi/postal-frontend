@@ -5,7 +5,11 @@
     require('./style.scss');
     return {
       scope: {},
-      bindToController: {},
+      bindToController: {
+        onCreate: '&',
+        onUpdate: '&',
+        onDelete: '&'
+      },
       controller: require('./controller'),
       controllerAs: 'ctrl',
       template: require('./template.html')

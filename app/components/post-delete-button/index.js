@@ -6,7 +6,8 @@
     return {
       scope: {},
       bindToController: {
-        post: '='
+        post: '=',
+        onDelete: '&'
       },
       controller: require('./controller'),
       controllerAs: 'ctrl',
