@@ -1,4 +1,6 @@
-<form name="ctrl.postCreateForm" ng-submit="ctrl.createPost(ctrl.post)" novalidate layout="row">
+<form name="ctrl.postCreateForm" ng-submit="ctrl.createPost(ctrl.post)" novalidate layout="column">
+
+  <md-progress-linear ng-if="ctrl.loading" md-mode="determinate" value="{{ ctrl.uploadPercentage }}"></md-progress-linear>
 
   <md-input-container md-no-float flex>
     <input ngf-select ng-change="ctrl.createPost(ctrl.post)" name="file" type="file" ng-model="ctrl.post.file" aria-label="File" required>

@@ -4,8 +4,13 @@
   module.exports = /*@ngInject*/ function ($log, $mdDialog, FilePost) {
     var ctrl = this;
     ctrl.post = new FilePost();
+    ctrl.loading = false;
+    ctrl.uploadPercentage = 0;
 
     function postCreateSuccess(response) {
+      ctrl.loading = false;
+      ctrl.uploadPercentage = 0;
+
       ctrl.post = new FilePost();
 
       // ctrl.postCreateForm.$setPristine();
@@ -45,12 +50,20 @@
     }
 
     function postCreateError(err) {
+      ctrl.loading = false;
+      ctrl.uploadPercentage = 0;
+
       console.error(err);
     }
 
+    function postUploadEvent(evt) {
+      ctrl.uploadPercentage = parseInt(100.0 * evt.loaded / evt.total);
+    }
+
     ctrl.createPost = function (post) {
+      ctrl.loading = true;
       FilePost.upload(post)
-        .then(postCreateSuccess, postCreateError);
+        .then(postCreateSuccess, postCreateError, postUploadEvent);
     };
   };
 }());
