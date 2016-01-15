@@ -1,9 +1,10 @@
 (function () {
   'use strict';
 
-  module.exports = /*@ngInject*/ function ($log, $rootScope, Post, FilePost, AUTH_EVENTS) {
+  module.exports = /*@ngInject*/ function ($log, $rootScope, User, FilePost, AUTH_EVENTS) {
     var ctrl = this;
     ctrl.posts = FilePost.query();
+    ctrl.user = User;
 
     $rootScope.$on(AUTH_EVENTS.loginSuccess, function () {
       ctrl.posts = FilePost.query();
