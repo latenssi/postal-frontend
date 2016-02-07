@@ -1,0 +1,5 @@
+FROM nodesource/jessie
+
+ENV NODE_ENV development
+
+WORKDIR /code

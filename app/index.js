@@ -4,6 +4,7 @@
   require('index.scss');
 
   var angular = require('angular');
+  var config = require('config');
 
   var app = angular.module('postal', [
     /* 3rd party */
@@ -22,10 +23,7 @@
     require('filters')
   ]);
 
-  app.constant('ENV', {
-    backendUrl: 'http://localhost:8000',
-    debugEnabled: true
-  });
+  app.constant('ENV', config.env);
 
   app.constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',

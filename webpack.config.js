@@ -35,6 +35,10 @@ module.exports = {
       hash: true,
       template: path.join(SRC_DIR, 'index.html'),
       inject: 'body'
+    }),
+    new webpack.DefinePlugin({
+      ENVIRONMENT: JSON.stringify(process.env.NODE_ENV || 'development'),
+      VERSION: JSON.stringify(require('./package.json').version)
     })
   ],
   externals: {

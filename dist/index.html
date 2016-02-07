@@ -1,0 +1,31 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postal</title>
+    <base href="/">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+
+  </head>
+
+  <body layout="column" user-auth>
+    <user-menu></user-menu>
+    
+    <post-list ng-if="userAuth.auth.isAuthenticated()"></post-list>
+
+    <script src="https://code.angularjs.org/1.4.8/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.8/angular-animate.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.8/angular-aria.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.8/angular-cookies.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.8/angular-messages.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.8/angular-resource.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.8/angular-route.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.8/angular-sanitize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
+
+  <script src="bundle.js?61f222ba9b19011ad1ea"></script></body>
+</html>

@@ -7,8 +7,8 @@
     "url": "git+https://github.com/latenssi/postal-frontend.git"
   },
   "scripts": {
-    "start": "node node_modules/.bin/webpack-dev-server --content-base app --hot --inline --config webpack.config.js",
-    "build": "node node_modules/.bin/webpack --bail -p"
+    "start": "node node_modules/.bin/webpack-dev-server --host 0.0.0.0 --port 8080 --content-base app --hot --inline --config webpack.config.js",
+    "build": "NODE_ENV=production node node_modules/.bin/webpack --bail -p"
   },
   "license": "ISC",
   "dependencies": {
